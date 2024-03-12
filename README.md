@@ -28,4 +28,7 @@ Alternatively, if you prefer a single command to create multiple directories, yo
 ```
 New-Item -ItemType Directory -Path './dags', './logs', './plugins', './config' -Force
 ```
-
+'''
+$uid = [System.Security.Principal.WindowsIdentity]::GetCurrent().User.Value
+echo "AIRFLOW_UID=$uid" > .env
+'''
