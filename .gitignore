@@ -1,5 +1,4 @@
 
-/venv3.10
 /.venv
-/airflow/logs
 Python code.ipynb
+/airflow/logs/scheduler

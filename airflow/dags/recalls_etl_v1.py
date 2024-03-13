@@ -8,7 +8,6 @@ import requests
 from datetime import datetime
 import psycopg2
 from sqlalchemy import create_engine
-import re
 
 # define database cedentials for database connection
 HOST_NAME = 'recalls_db'
