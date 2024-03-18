@@ -20,8 +20,9 @@ PORT_ID = 5432
 raw_url = 'https://recalls-rappels.canada.ca/sites/default/files/opendata-donneesouvertes/HCRSAMOpenData.json'
 
 # data path to save raw data and cleaned data
-raw_data_path = '/opt/airflow/data/raw/recalls_raw.csv'
-cleaned_data_path = '/opt/airflow/data/cleaned/recalls_cleaned.csv'
+raw_data_path = '/opt/airflow/recalls_raw.csv'
+cleaned_data_path = '/opt/airflow/recalls_cleaned.csv'
+file = '/opt/airflow/dags/sample.json'
 
 # define a dag variable based on the Airflow DAG object
 dag = DAG(
@@ -37,7 +38,7 @@ dag = DAG(
 Due to the fact that the api file was corrupted and the IT team from the source did not get them fixed. Therefore, using URL will cause the error and fail the process.
 Instead, I will use a sample json file that was extracted from the source to make the process to run.
 Therefore, get_recall_data funciton would be replaced by a smiple function to call local the file.
-"""
+
 def get_recall_data(url, raw_output_path):
     response = requests.get(url)
     response_data = response.json()
@@ -66,7 +67,17 @@ def get_recall_data(url, raw_output_path):
     recall_df['data_received_at'] = current_timestamp
 
     recall_df.to_csv(raw_output_path, index=False)
+"""
+def get_recall_data(file, raw_output_path):
+    df = pd.read_json(file)
+    df[['NID','Organization','Product','Issue','Category','Last updated']]
+    current_timestamp = datetime.now()
 
+    df['data_received_at'] = current_timestamp
+
+    df.rename(columns={'NID':'recall_id','Organization':'organization','Product':'product_name','Issue':'issue','Category':'category','Last updated':'updated_at'},inplace=True)
+
+    df.to_csv(raw_output_path, index=False)
 
 # define a transformation function and save the cleaned data into another csv
 def clean_recall_data(raw_input_path, cleaned_output_path):
@@ -95,11 +106,22 @@ def load_to_db(db_host, db_name, db_user, db_pswd, db_port, data_path):
 
 
 # define task using Airflow PythonOperator for raw data extraction
+"""    
+# get_raw_data = PythonOperator(
+#     task_id='get_raw_data',
+#     python_callable=get_recall_data,
+#     op_kwargs={
+#         'url': raw_url,
+#         'raw_output_path': raw_data_path
+#     },
+#     dag=dag,
+# )
+"""    
 get_raw_data = PythonOperator(
     task_id='get_raw_data',
     python_callable=get_recall_data,
     op_kwargs={
-        'url': raw_url,
+        'file': file,
         'raw_output_path': raw_data_path
     },
     dag=dag,

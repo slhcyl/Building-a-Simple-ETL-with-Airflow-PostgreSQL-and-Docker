@@ -1,0 +1,48 @@
+[2024-03-18T22:40:48.045+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=recalls_etl_v1/run_id=manual__2024-03-18T22:40:46.471080+00:00/task_id=get_raw_data permission to 509
+[2024-03-18T22:40:48.083+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=recalls_etl_v1/run_id=manual__2024-03-18T22:40:46.471080+00:00/task_id=get_raw_data permission to 509
+[2024-03-18T22:40:48.125+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: recalls_etl_v1.get_raw_data manual__2024-03-18T22:40:46.471080+00:00 [queued]>
+[2024-03-18T22:40:48.136+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: recalls_etl_v1.get_raw_data manual__2024-03-18T22:40:46.471080+00:00 [queued]>
+[2024-03-18T22:40:48.137+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2024-03-18T22:40:48.154+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): get_raw_data> on 2024-03-18 22:40:46.471080+00:00
+[2024-03-18T22:40:48.159+0000] {standard_task_runner.py:57} INFO - Started process 1732 to run task
+[2024-03-18T22:40:48.165+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'recalls_etl_v1', 'get_raw_data', 'manual__2024-03-18T22:40:46.471080+00:00', '--job-id', '30', '--raw', '--subdir', 'DAGS_FOLDER/recalls_etl_v1.py', '--cfg-path', '/tmp/tmpmnsc3k3e']
+[2024-03-18T22:40:48.166+0000] {standard_task_runner.py:85} INFO - Job 30: Subtask get_raw_data
+[2024-03-18T22:40:48.225+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=recalls_etl_v1/run_id=manual__2024-03-18T22:40:46.471080+00:00/task_id=get_raw_data permission to 509
+[2024-03-18T22:40:48.234+0000] {task_command.py:416} INFO - Running <TaskInstance: recalls_etl_v1.get_raw_data manual__2024-03-18T22:40:46.471080+00:00 [running]> on host 3694d3cee1cf
+[2024-03-18T22:40:48.333+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='recalls_etl_v1' AIRFLOW_CTX_TASK_ID='get_raw_data' AIRFLOW_CTX_EXECUTION_DATE='2024-03-18T22:40:46.471080+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-03-18T22:40:46.471080+00:00'
+[2024-03-18T22:40:48.370+0000] {warnings.py:109} WARNING - /opt/***/dags/recalls_etl_v1.py:74: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  recall_df.rename(columns={'NID': 'recall_id', 'Organization': 'organization','Product':'product_name','Issue':'issue','Category':'category','Last updated':'updated_at'}, inplace=True)
+
+[2024-03-18T22:40:48.373+0000] {warnings.py:109} WARNING - /opt/***/dags/recalls_etl_v1.py:77: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  recall_df['data_received_at'] = current_timestamp
+
+[2024-03-18T22:40:48.375+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/recalls_etl_v1.py", line 79, in get_recall_data
+    recall_df.to_csv(raw_output_path, index=False)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/generic.py", line 3772, in to_csv
+    return DataFrameRenderer(formatter).to_csv(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/formats/format.py", line 1186, in to_csv
+    csv_formatter.save()
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/formats/csvs.py", line 240, in save
+    with get_handle(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/common.py", line 737, in get_handle
+    check_parent_directory(str(handle))
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/common.py", line 600, in check_parent_directory
+    raise OSError(rf"Cannot save file into a non-existent directory: '{parent}'")
+OSError: Cannot save file into a non-existent directory: '/opt/***/data/raw'
+[2024-03-18T22:40:48.390+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=recalls_etl_v1, task_id=get_raw_data, execution_date=20240318T224046, start_date=20240318T224048, end_date=20240318T224048
+[2024-03-18T22:40:48.406+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 30 for task get_raw_data (Cannot save file into a non-existent directory: '/opt/***/data/raw'; 1732)
+[2024-03-18T22:40:48.417+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2024-03-18T22:40:48.452+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
