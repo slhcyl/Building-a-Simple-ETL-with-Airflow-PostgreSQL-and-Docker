@@ -33,6 +33,11 @@ dag = DAG(
 
 # define the extraction function that takes API url
 # and save the raw data as a csv
+"""
+Due to the fact that the api file was corrupted and the IT team from the source did not get them fixed. Therefore, using URL will cause the error and fail the process.
+Instead, I will use a sample json file that was extracted from the source to make the process to run.
+Therefore, get_recall_data funciton would be replaced by a smiple function to call local the file.
+"""
 def get_recall_data(url, raw_output_path):
     response = requests.get(url)
     response_data = response.json()
@@ -61,6 +66,7 @@ def get_recall_data(url, raw_output_path):
     recall_df['data_received_at'] = current_timestamp
 
     recall_df.to_csv(raw_output_path, index=False)
+
 
 # define a transformation function and save the cleaned data into another csv
 def clean_recall_data(raw_input_path, cleaned_output_path):

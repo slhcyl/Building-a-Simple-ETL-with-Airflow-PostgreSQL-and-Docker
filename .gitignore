@@ -2,3 +2,4 @@
 /.venv
 Python code.ipynb
 /airflow/logs/scheduler
+airflow/dags/__pycache__/sample file.json
