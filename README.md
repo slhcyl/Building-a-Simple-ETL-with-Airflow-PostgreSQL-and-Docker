@@ -10,7 +10,7 @@ The github repo can be found at [here](https://github.com/sevkw/airflow-etl/tree
 
 # Issue
 Airflow DAG recalls_etl_v1.py and PostgreSQL Database was created, however, the DAG recalls_etl_v1 failed due to ERROR - Failed to execute job 10 for task get_raw_data (Unterminated string starting at: line 1 column 3244243 (char 3244242); 2199).
-I conntaced the original owner of this process and got the reply from him. By running the following, I was unable to get the 200 records. It indicates the original API was corrupted and wasn't fixed by the IT team.
+I conntaced the original owner of this process and got the reply from him. By running the following code, I was unable to get the 200 records. It indicates the original API was corrupted and wasn't fixed by the IT team.
 ```
 import requests
 
