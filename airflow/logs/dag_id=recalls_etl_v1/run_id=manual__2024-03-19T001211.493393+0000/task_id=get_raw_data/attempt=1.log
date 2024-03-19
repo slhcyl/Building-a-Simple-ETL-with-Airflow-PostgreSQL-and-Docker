@@ -1,0 +1,35 @@
+[2024-03-19T00:12:13.595+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=recalls_etl_v1/run_id=manual__2024-03-19T00:12:11.493393+00:00/task_id=get_raw_data permission to 509
+[2024-03-19T00:12:13.634+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=recalls_etl_v1/run_id=manual__2024-03-19T00:12:11.493393+00:00/task_id=get_raw_data permission to 509
+[2024-03-19T00:12:13.675+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: recalls_etl_v1.get_raw_data manual__2024-03-19T00:12:11.493393+00:00 [queued]>
+[2024-03-19T00:12:13.687+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: recalls_etl_v1.get_raw_data manual__2024-03-19T00:12:11.493393+00:00 [queued]>
+[2024-03-19T00:12:13.688+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2024-03-19T00:12:13.709+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): get_raw_data> on 2024-03-19 00:12:11.493393+00:00
+[2024-03-19T00:12:13.715+0000] {standard_task_runner.py:57} INFO - Started process 3186 to run task
+[2024-03-19T00:12:13.718+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'recalls_etl_v1', 'get_raw_data', 'manual__2024-03-19T00:12:11.493393+00:00', '--job-id', '56', '--raw', '--subdir', 'DAGS_FOLDER/recalls_etl_v1.py', '--cfg-path', '/tmp/tmp6cxae45_']
+[2024-03-19T00:12:13.719+0000] {standard_task_runner.py:85} INFO - Job 56: Subtask get_raw_data
+[2024-03-19T00:12:13.801+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=recalls_etl_v1/run_id=manual__2024-03-19T00:12:11.493393+00:00/task_id=get_raw_data permission to 509
+[2024-03-19T00:12:13.820+0000] {task_command.py:416} INFO - Running <TaskInstance: recalls_etl_v1.get_raw_data manual__2024-03-19T00:12:11.493393+00:00 [running]> on host 3694d3cee1cf
+[2024-03-19T00:12:13.948+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='recalls_etl_v1' AIRFLOW_CTX_TASK_ID='get_raw_data' AIRFLOW_CTX_EXECUTION_DATE='2024-03-19T00:12:11.493393+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-03-19T00:12:11.493393+00:00'
+[2024-03-19T00:12:13.979+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/recalls_etl_v1.py", line 80, in get_recall_data
+    df.to_csv(raw_output_path, index=False)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/generic.py", line 3772, in to_csv
+    return DataFrameRenderer(formatter).to_csv(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/formats/format.py", line 1186, in to_csv
+    csv_formatter.save()
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/formats/csvs.py", line 240, in save
+    with get_handle(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/common.py", line 737, in get_handle
+    check_parent_directory(str(handle))
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/common.py", line 600, in check_parent_directory
+    raise OSError(rf"Cannot save file into a non-existent directory: '{parent}'")
+OSError: Cannot save file into a non-existent directory: '/opt/***/data'
+[2024-03-19T00:12:14.000+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=recalls_etl_v1, task_id=get_raw_data, execution_date=20240319T001211, start_date=20240319T001213, end_date=20240319T001213
+[2024-03-19T00:12:14.016+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 56 for task get_raw_data (Cannot save file into a non-existent directory: '/opt/***/data'; 3186)
+[2024-03-19T00:12:14.052+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2024-03-19T00:12:14.079+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
